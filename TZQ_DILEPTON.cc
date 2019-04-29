@@ -135,12 +135,6 @@ namespace Rivet {
       }	
 
       if (jet.bTagged(Cuts::abseta < 2.4)) Tracker_bTaggedjets.push_back(jet);
-/*
-      if (Tracker_bTaggedjets.size() != 1) {
-        MSG_DEBUG("Event failed b jet multiplicity cut");
-        vetoEvent;
-      }
-*/
 
      
       if (Tracker_bTaggedjets.size() < 1 || Tracker_bTaggedjets.size() > 2) {
@@ -160,13 +154,7 @@ namespace Rivet {
       for(size_t i = 0; i < JetSize; ++i){
 	for(size_t k = i+1; k < JetSize; ++k){
 
-//		cout << "Delta R between the leading b jet and the ith jet is" << " " << deltaR(jets.at(i), Tracker_bTaggedjets.at(0)) << endl;
-//		cout << "Delta R between the leading b jet and the kth jet is" << " " << deltaR(jets.at(k), Tracker_bTaggedjets.at(0)) << endl;
-
 			if((deltaR(jets.at(i), Tracker_bTaggedjets.at(0)) > 0.01) && deltaR(jets.at(k), Tracker_bTaggedjets.at(0)) > 0.01){
-
- //		cout << "Delta R between the leading b jet and the ith jet is" << " " << deltaR(jets.at(i), Tracker_bTaggedjets.at(0)) << endl;
- //               cout << "Delta R between the leading b jet and the kth jet is" << " " << deltaR(jets.at(k), Tracker_bTaggedjets.at(0)) << endl;
 
 				double mass_reco = (jets.at(i).momentum() + jets.at(k).momentum()).mass();
 					
@@ -201,7 +189,7 @@ namespace Rivet {
       }
      
 
-      //Finding the four momentum of the leading W jet and filling the W mass plot
+      //Finding the four momentum of the W boson and filling the W mass plot
       FourMomentum W = Wpair[0].momentum()+Wpair[1].momentum();
       _h_W_mass->fill(W.mass(), weight);	
       // reconstruct top quark from the W and leading bTagged jet from the tracker
